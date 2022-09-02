@@ -1,0 +1,179 @@
+{% extends 'GoGreen/base.html' %}
+{% load static %}
+{% block title %}
+    Home
+{% endblock %}
+
+{% block additionalStyles %}
+     <link rel="stylesheet" href="{% static 'GoGreen/Css/style.css' %}"/>
+{% endblock additionalStyles %}
+    {% block scripts %}
+
+
+    {% endblock scripts %}
+
+{% block content %}
+
+    {% include 'GoGreen/imageslider.html' %}
+
+{% load plotly_dash %}
+
+    </br>
+<div class="containers">
+<div class="d-flex flex-wrap align-content-end">
+    <div class="col">
+        <!-- Card to expand modal -->
+        <div class="card p-3 mb-5 rounded"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal1"
+            style="width: 18rem; ">
+            <h6 class="card-title" style="color: #515A5A">Global Temperature</h6>
+            <p class="card-text">
+                <span style="color: #636EFA;font-size:25px; display: inline-block">
+                      {{ temp_change }}
+                </span>
+                <span style="display: inline-block; font-size:13px">
+                      since 1880
+                </span>
+            </p>
+
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="ModalLabel1" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel1">Global Temperature</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="{% plotly_class name='temperature' %}">
+                    {% plotly_app name='temperature' ratio=0.8%}
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+
+    <div class="col">
+        <!-- Card to expand modal -->
+        <div class="card shadow-sm p-3 mb-5 rounded"
+             data-bs-toggle="modal"
+             data-bs-target="#Modal2"
+             style="width: 18rem;">
+             <h6 class="card-title" style="color: #515A5A">Carbon Dioxide</h6>
+             <p class="card-text">
+                <span style="color: #636EFA;font-size:25px; display: inline-block">
+                      {{ co2_change }}
+                </span>
+                <span style="display: inline-block; font-size:13px">
+                      since 1958
+                </span>
+             </p>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="ModalLabel2" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel2">Carbon Dioxide</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  {{ fig_co2 | safe }}
+              </div>
+
+            </div>
+          </div>
+        </div>
+    </div><div class="col">
+        <!-- Card to expand modal -->
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded"
+             data-bs-toggle="modal"
+             data-bs-target="#Modal3"
+             style="width: 18rem;">
+             <h6 class="card-title" style="color: #515A5A">Arctic Sea Ice Extent</h6>
+             <p class="card-text">
+                <span style="color: #636EFA;font-size:25px; display: inline-block">
+                      {{ sea_ice_change }}
+                </span>
+                <span style="display: inline-block; font-size:13px">
+                      since 1979
+                </span>
+             </p>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="Modal3" tabindex="-1" aria-labelledby="ModalLabel3" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel3">Arctic Sea Ice Extent</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                   <div class="modal-body">
+                {{ fig_sea_ice | safe }}
+
+              </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div class="col">
+        <!-- Card to expand modal -->
+        <div class="card shadow-sm p-3 mb-5 bg-white rounded"
+             data-bs-toggle="modal"
+             data-bs-target="#Modal4"
+             style="width: 18rem;">
+             <h6 class="card-title" style="color: #515A5A">Sea Level</h6>
+            <p class="card-text">
+                <span style="color: #636EFA;font-size:25px; display: inline-block">
+                      {{ sea_level_change }}
+                </span>
+                <span style="display: inline-block; font-size:13px">
+                      since 1993
+                </span>
+             </p>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="Modal4" tabindex="-1" aria-labelledby="ModalLabel4" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel4">Ice Sheets</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                {{ fig_sea_level | safe }}
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+</div>
+{% endblock %}

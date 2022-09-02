@@ -1,0 +1,7 @@
+{% extends 'GoGreen/effectsbase.html' %}
+{% block detailsContent %}
+{% load plotly_dash %}
+    {% plotly_header %}
+    {% plotly_direct name='forestfire' %}
+    {% plotly_footer %}
+{% endblock %}

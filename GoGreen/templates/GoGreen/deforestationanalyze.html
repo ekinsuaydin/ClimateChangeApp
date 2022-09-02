@@ -1,0 +1,46 @@
+{% extends 'GoGreen/causesbase.html' %}
+{% load static %}
+{% block detailsContent %}
+
+<div style="margin: 10px">
+   <h5 style="color : #F2F3F4">Examine the Image</h5>
+        <a href="{% url 'deforestation' %}"
+                class="btn btn-outline-secondary"
+                data-mdb-ripple-color="dark"
+                style="height: 50px;
+                       width: 25%;
+                       border-color: #636EFA;
+                       color: #636EFA;
+                       border-width: 2px  ">
+            Go Back
+        </a>
+    <br>
+    <br>
+    <div style="display: inline-block; width: 50%; float: left";>
+        {{ plot | safe }}
+            <p style="color: #F2F3F4">
+                Date: {{ image.date }}
+                <br>
+                Location: {{ image.location }}
+            </p>
+    </div>
+    <div style="display: inline-block; width: 50%; float: left;">
+          {{ plot2 | safe }}
+            <p style="color: #F2F3F4">
+                    Cluster: {{ cluster }}
+            </p>
+    </div>
+</div>
+<div style="clear: both;
+            width: inherit;
+            height: auto;
+            position: static;
+            margin-left: 10px">
+        {{ plot3 | safe }}
+</div>
+
+
+
+
+
+{% endblock %}

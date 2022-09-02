@@ -1,0 +1,93 @@
+{% extends 'GoGreen/effectsbase.html' %}
+{% block detailsContent %}
+
+<div style="margin: 10px">
+ <div>
+   <h5 style="color : #F2F3F4;">Sea Level Rise</h5>
+ </div>
+
+    <br>
+    {{ plot_sealevel | safe }}
+    <br>
+
+        <form method='POST' action="" enctype="multipart/form-data">
+           {% csrf_token %}
+                <div class="form-group" style=" display: inline-block; width: 30%; float: left;">
+                    <label style="color: #F2F3F4">Enter a year to make a prediction:</label>
+                    <input name="prediction_year" class="form-control" type="number">
+                </div>
+                <br>
+            <div style="display: inline-block; width: 30%; float: left; margin-left: 10px;">
+                <button type="submit"
+                       class="btn btn-outline-secondary"
+                            data-mdb-ripple-color="dark"
+                            name="prediction1"
+                            style="height: 40px;
+                                  width: 100%;
+                                  border-color: #636EFA;
+                                  color: #636EFA;
+                                  border-width: 1px  ">
+                       Predict
+                </button>
+            </div>
+        </form>
+<br>
+<div style="clear: both;
+            width: inherit;
+            height: auto;
+            position: static;">
+    <p style="color: #F2F3F4;">The predicted sea level in {{ prediction_year }} is {{ prediction }} mm.
+    </p>
+</div>
+    <br>
+ <div>
+   <h5 style="color : #F2F3F4;">Temperature Rises, the Ocean Heat Rises!</h5>
+ </div>
+ <br>
+    {{ plot_oceanheat_temp | safe }}
+    <br>
+
+        <form method='POST' action="" enctype="multipart/form-data">
+           {% csrf_token %}
+                <div class="form-group" style=" display: inline-block; width: 30%; float: left;">
+                    <label style="color: #F2F3F4">Enter temperature in degrees C°:</label>
+                    <input name="prediction_year2" class="form-control" type="number"
+                    step="0.01">
+                </div>
+                <br>
+            <div style="display: inline-block; width: 30%; float: left; margin-left: 10px;">
+                <button type="submit"
+                       class="btn btn-outline-secondary"
+                            data-mdb-ripple-color="dark"
+                            name="prediction2"
+                            style="height: 40px;
+                                  width: 100%;
+                                  border-color: #636EFA;
+                                  color: #636EFA;
+                                  border-width: 1px  ">
+                       Predict
+                </button>
+            </div>
+        </form>
+<br>
+
+<div style="clear: both;
+            width: inherit;
+            height: auto;
+            position: static;">
+    <p style="color: #F2F3F4;">The predicted ocean heat when temperature anomaly is {{ prediction_year2 }}: {{ prediction2 }} zettajoules.
+    </p>
+</div>
+
+<br>
+
+ <div>
+   <h5 style="color : #F2F3F4;">See the Graph Below for the Predictions You Made!</h5>
+ </div>
+<br>
+    {{ plot_user_graph | safe }}
+    <br>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends 'GoGreen/causesbase.html' %}
+{% block detailsContent %}
+<div style="margin: 10px">
+   <h5 style="color : #F2F3F4">Examine Satellite Images</h5>
+    <div style="display: inline-block; width: 48%; float: left";>
+        <button type="button"
+                class="btn btn-outline-secondary"
+                data-mdb-ripple-color="dark"
+                data-bs-toggle="modal"
+                data-bs-target="#Modal1"
+                style="height: 50px;
+                       width: 100%;
+                       border-color: #636EFA;
+                       color: #636EFA;
+                       border-width: 2px  ">
+            See Our Satellite Image Gallery
+        </button>
+    </div>
+    <div style="display: inline-block; width: 48%; float: left; margin-left: 10px">
+        <button type="button"
+                class="btn btn-outline-secondary"
+                data-mdb-ripple-color="dark"
+                data-bs-toggle="modal"
+                data-bs-target="#Modal2"
+                style="height: 50px;
+                       width: 100%;
+                       border-color: #636EFA;
+                       color: #636EFA;
+                       border-width: 1px;
+                       border-style: dotted;">
+            Upload an Image
+        </button>
+    </div>
+        <!-- Modal -->
+        <div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="ModalLabel1" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel1">Satellite Image Gallery</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+                <div class="container">
+                      <div class="modal-body">
+                          <div class="row">
+                              {% for image in images %}
+                              <div class="col-md-6">
+                                    <div class="card" style="width: 18rem;">
+                                        <img class="card-img-top" src="{{ image.image.url }}" alt="Card image cap">
+                                        <div class="card-body">
+
+                                            <p class="card-text">
+                                                Date: {{ image.date }}
+                                                <br>
+                                                Location: {{ image.location }}
+                                            </p>
+                                            <form action="{% url 'deforestationanalyze' image.id %}">
+                                                {% csrf_token %}
+                                                <select class="form-select" name="cluster" aria-label="Default select example" required>
+                                                      <option value="" selected disabled>Select Number of Cluster</option>
+                                                      <option value="2">2</option>
+                                                      <option value="3">3</option>
+                                                      <option value="4">4</option>
+                                                </select>
+                                                <br>
+                                                <input
+                                                        type="submit"
+                                                        value="Analyze the Image"
+                                                        class="btn btn-primary"
+                                                        style="width: 100%;background-color: #636EFA;color: #F2F3F4;">
+
+
+                                            </form>
+                                        </div>
+                                    </div>
+                              </div>
+                          {% endfor %}
+                     </div>
+                  </div>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="ModalLabel3" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel3">Upload a Satellite Image To Examine</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                   <div class="modal-body">
+
+                        <form method='POST' action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <label>Upload satellite image</label>
+                                <input required name="image" class="form-control" type="file">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Enter date of the image</label>
+                                <input name="date" class="form-control" placeholder="Not Required" type="text">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Enter location of the image</label>
+                                <input name="location" class="form-control" placeholder="Not Required" type="text">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Enter area of the image</label>
+                                <input name="area" class="form-control" placeholder="Not Required" type="number">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Enter for number of clusters</label>
+                                <input name="cluster" required class="form-control" placeholder="Required" type="number">
+                            </div>
+                            <br>
+                            <button type="submit"
+                                class="btn btn-outline-secondary"
+                                data-mdb-ripple-color="dark"
+                                style="height: 50px;
+                                       width: 100%;
+                                       border-color: #636EFA;
+                                       color: #636EFA;
+                                       border-width: 2px  ">
+                                    Analyze the Image
+                            </button>
+
+                        </form>
+                   </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <br>
+
+</div>
+
+
+{% endblock %}

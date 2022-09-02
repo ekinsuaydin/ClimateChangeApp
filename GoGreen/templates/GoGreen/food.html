@@ -1,0 +1,7 @@
+{% extends 'GoGreen/causesbase.html' %}
+{% block detailsContent %}
+{% load plotly_dash %}
+    {% plotly_header %}
+    {% plotly_direct name='food' %}
+    {% plotly_footer %}
+{% endblock %}

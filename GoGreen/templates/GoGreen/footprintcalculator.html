@@ -1,0 +1,25 @@
+{% extends 'GoGreen/base.html' %}
+{% load static %}
+{% block title %}
+    Footprint Calculator
+{% endblock %}
+{% block additionalStyles %}
+     <link rel="stylesheet" href="{% static 'GoGreen/Css/style.css' %}"/>
+{% endblock additionalStyles %}
+{% block scripts %}
+
+{% endblock scripts %}
+
+{% block content %}
+
+{% load plotly_dash %}
+    <div class="containers" style="height: 100vh;">
+    {% plotly_header %}
+    {% plotly_direct name='carbonfootprint' %}
+    {% plotly_footer %}
+
+</div>
+
+
+{% endblock %}
+

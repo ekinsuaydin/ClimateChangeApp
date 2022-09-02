@@ -1,0 +1,14 @@
+{% extends 'GoGreen/causesbase.html' %}
+{% block detailsContent %}
+{% load plotly_dash %}
+    <div style="margin: 5px">
+    <h5 style="color : #F2F3F4">Carbon Dioxide(CO2) Concentration</h5>
+    {{ plot_co2 | safe }}
+    <br>
+    <h5 style="color : #F2F3F4">Methane(CH4) Concentration</h5>
+    {{ plot_ch4 | safe }}
+    <br>
+    <h5 style="color : #F2F3F4">Nitrogen Oxide(N2O) Concentration</h5>
+    {{ plot_no2 | safe }}
+    </div>
+{% endblock %}

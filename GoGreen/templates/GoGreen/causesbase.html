@@ -1,0 +1,31 @@
+{% extends 'GoGreen/base.html' %}
+{% load static %}
+{% block title %}
+    Causes
+{% endblock %}
+
+{% block additionalStyles %}
+     <link rel="stylesheet" href="{% static 'GoGreen/Css/style.css' %}"/>
+{% endblock additionalStyles %}
+    {% block scripts %}
+
+    {% endblock scripts %}
+
+{% block content %}
+
+<div class="insidecontainer">
+    <div class="left">
+        <a href="{% url 'greenhousegases' %}">Greenhouse Gases</a>
+        <a href="{% url 'deforestation' %}">Cutting Down Forests</a>
+        <a href="{% url 'food' %}">Producing Food</a>
+        <a href="#">Using Transportation</a>
+    </div>
+
+    <div class="right">
+        {% block detailsContent %}
+
+        {% endblock %}
+    </div>
+
+</div>
+{% endblock content %}

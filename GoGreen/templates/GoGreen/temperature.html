@@ -1,0 +1,139 @@
+{% extends 'GoGreen/effectsbase.html' %}
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).on('submit','#prediction_form1',function(e){
+            e.preventDefault();
+            console.log($('#prediction_year').val())
+            $.ajax({
+                type:'POST',
+                url:'',
+                data:{
+                    action: 'first_prediction',
+                    prediction_year:$('#prediction_year').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+
+                },
+                success:function(response){
+                    console.log('Successfull prediction')
+                    console.log(response['prediction'])
+                    $("#prdc1").text('The predicted temperature in '+ response['prediction_year'] + ' is ' + response['prediction'] +' C°.')
+                }
+            });
+        });
+        $(document).on('submit','#prediction_form2',function(e){
+            e.preventDefault();
+            console.log($('#co2').val())
+            $.ajax({
+                type:'POST',
+                url:'',
+                data:{
+                    action: 'second_prediction',
+                    co2:$('#co2').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+
+                },
+                success:function(response){
+                    console.log('Successfull prediction')
+                    console.log(response['prediction'])
+                    $("#prdc2").text('The predicted temperature when Co2: '+ response['co2'] + ' is ' + response['prediction'] +' C°.')
+                }
+            });
+        });
+
+
+        </script>
+
+{% endblock scripts %}
+{% block detailsContent %}
+
+<div style="margin: 10px">
+ <div>
+   <h5 style="color : #F2F3F4;">Temperature Change from 1880 to 2021</h5>
+ </div>
+
+    <br>
+    {{ plot_fig_co2 | safe }}
+    <br>
+
+        <form id="prediction_form1">
+           {% csrf_token %}
+                <div class="form-group" style=" display: inline-block; width: 30%; float: left;">
+                    <label style="color: #F2F3F4">Enter a year to make a prediction:</label>
+                    <input id="prediction_year" class="form-control" type="number">
+                </div>
+                <br>
+            <div style="display: inline-block; width: 30%; float: left; margin-left: 10px;">
+                <button type="submit"
+                       class="btn btn-outline-secondary"
+                            data-mdb-ripple-color="dark"
+                            name="prediction1"
+                            style="height: 40px;
+                                  width: 100%;
+                                  border-color: #636EFA;
+                                  color: #636EFA;
+                                  border-width: 1px  ">
+                       Predict
+                </button>
+            </div>
+        </form>
+<br>
+<div style="clear: both;
+            width: inherit;
+            height: auto;
+            position: static;">
+    <p id='prdc1' style="color: #F2F3F4;">
+    </p>
+</div>
+    <br>
+ <div>
+   <h5 style="color : #F2F3F4;">Carbon-dioxide Increases, Temperature Increases!</h5>
+ </div>
+ <br>
+    {{ plot_co2_temp | safe }}
+    <br>
+
+        <form id="prediction_form2">
+           {% csrf_token %}
+                <div class="form-group" style=" display: inline-block; width: 30%; float: left;">
+                    <label style="color: #F2F3F4">Enter co2 in ppm:</label>
+                    <input id="co2" class="form-control" type="number" step="0.01">
+
+                </div>
+                <br>
+            <div style="display: inline-block; width: 30%; float: left; margin-left: 10px;">
+                <button type="submit"
+                       class="btn btn-outline-secondary"
+                            data-mdb-ripple-color="dark"
+                            name="prediction2"
+                            style="height: 40px;
+                                  width: 100%;
+                                  border-color: #636EFA;
+                                  color: #636EFA;
+                                  border-width: 1px  ">
+                       Predict
+                </button>
+            </div>
+        </form>
+<br>
+
+<div style="clear: both;
+            width: inherit;
+            height: auto;
+            position: static;">
+    <p id='prdc2' style="color: #F2F3F4;">
+    </p>
+</div>
+
+<br>
+
+ <div>
+   <h5 style="color : #F2F3F4;">See the Graph Below for the Predictions You Made!</h5>
+ </div>
+<br>
+    {{ plot_user_graph | safe }}
+    <br>
+
+</div>
+
+{% endblock %}

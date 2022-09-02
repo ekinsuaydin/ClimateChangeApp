@@ -1,0 +1,31 @@
+{% extends 'GoGreen/base.html' %}
+{% load static %}
+{% block title %}
+    Effects
+{% endblock %}
+
+{% block additionalStyles %}
+     <link rel="stylesheet" href="{% static 'GoGreen/Css/style.css' %}"/>
+{% endblock additionalStyles %}
+    {% block scripts %}
+
+    {% endblock scripts %}
+
+{% block content %}
+
+<div class="insidecontainer">
+    <div class="left">
+        <a href="{% url 'temperature' %}">Hotter Temperature</a>
+        <a href="{% url 'sealevel' %}">Warmer & Rising Sea Level</a>
+        <a href="{% url 'arcticsea' %}">Mass Loss of Ice Sheets</a>
+        <a href="{% url 'forestfire' %}">Wildfires</a>
+    </div>
+
+    <div class="right">
+        {% block detailsContent %}
+
+        {% endblock %}
+    </div>
+
+</div>
+{% endblock content %}
